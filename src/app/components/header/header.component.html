@@ -1,21 +1,73 @@
-<header class="header" [class.header--solid]="scrolled()">
+<header class="header" [class.header--solid]="scrolled() || menuOpen()">
   <div class="header__inner container">
-    <a class="header__brand" href="#" (click)="scrollTo('hero'); $event.preventDefault()">
+    <a
+      class="header__brand"
+      href="#"
+      (click)="scrollTo('hero'); $event.preventDefault()"
+    >
       <img src="assets/logo-cftm.png" alt="CFTM - Circuito Futevôlei Triângulo Mineiro" width="320" height="96" />
     </a>
-    <nav class="header__nav" aria-label="Principal">
+
+    <nav class="header__nav header__nav--desktop" aria-label="Principal">
       <button type="button" (click)="scrollTo('sobre')">O Circuito</button>
       <button type="button" (click)="scrollTo('investidores')">Patrocínio</button>
       <button type="button" (click)="scrollTo('ranking')">Ranking</button>
       <button type="button" (click)="scrollTo('edicoes')">Edições</button>
     </nav>
-    <a
-      class="header__cta btn btn--accent"
-      href="https://www.instagram.com/cftm.oficial/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Instagram
-    </a>
+
+    <div class="header__actions">
+      <a
+        class="header__cta btn btn--accent header__cta--desktop"
+        href="https://www.instagram.com/cftm.oficial/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <app-instagram-icon />
+        <span>Instagram</span>
+      </a>
+      <button
+        type="button"
+        class="header__menu-btn"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="header-mobile-menu"
+        aria-label="Abrir menu"
+        (click)="toggleMenu()"
+      >
+        <span class="header__menu-icon" [class.header__menu-icon--open]="menuOpen()"></span>
+      </button>
+    </div>
   </div>
+
+  @if (menuOpen()) {
+    <div
+      id="header-mobile-menu"
+      class="header__mobile-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navegação"
+    >
+      <nav class="header__mobile-nav">
+        <button type="button" (click)="scrollTo('sobre')">O Circuito</button>
+        <button type="button" (click)="scrollTo('investidores')">Patrocínio</button>
+        <button type="button" (click)="scrollTo('ranking')">Ranking</button>
+        <button type="button" (click)="scrollTo('edicoes')">Edições</button>
+        <a
+          class="btn btn--accent header__mobile-cta"
+          href="https://www.instagram.com/cftm.oficial/"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="closeMenu()"
+        >
+          <app-instagram-icon />
+          <span>Instagram</span>
+        </a>
+      </nav>
+    </div>
+    <button
+      type="button"
+      class="header__backdrop"
+      aria-label="Fechar menu"
+      (click)="closeMenu()"
+    ></button>
+  }
 </header>

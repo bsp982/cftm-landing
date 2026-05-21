@@ -49,7 +49,20 @@
         </span>
       </div>
 
-      <div class="ranking__table-wrap">
+      <ul class="ranking__list">
+        @for (row of ranking.standings; track row.name) {
+          <li class="ranking__card" [class.ranking__card--top]="row.position <= 3">
+            <span class="ranking__card-pos">{{ row.position }}</span>
+            <div class="ranking__card-body">
+              <strong>{{ row.name }}</strong>
+              <span>{{ row.city }}</span>
+            </div>
+            <span class="ranking__card-pts">{{ row.points }} pts</span>
+          </li>
+        }
+      </ul>
+
+      <div class="ranking__table-wrap ranking__table-wrap--desktop">
         <table class="ranking__table">
           <thead>
             <tr>

@@ -30,7 +30,20 @@
 
   @if (activeRanking(); as ranking) {
     <p class="season-ranking__meta">{{ activeGroup().genderLabel }} · {{ ranking.label }}</p>
-    <div class="season-ranking__table-wrap">
+    <ul class="season-ranking__list">
+      @for (row of ranking.standings; track row.name) {
+        <li class="season-ranking__card" [class.season-ranking__card--top]="row.position <= 3">
+          <span class="season-ranking__card-pos">{{ row.position }}</span>
+          <div class="season-ranking__card-body">
+            <strong>{{ row.name }}</strong>
+            <span>{{ row.city }}</span>
+          </div>
+          <span class="season-ranking__card-pts">{{ row.points }} pts</span>
+        </li>
+      }
+    </ul>
+
+    <div class="season-ranking__table-wrap season-ranking__table-wrap--desktop">
       <table class="season-ranking__table">
         <thead>
           <tr>

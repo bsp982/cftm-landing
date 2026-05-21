@@ -1,6 +1,6 @@
 .footer {
   border-top: 1px solid var(--color-border);
-  padding: 3rem 0 2rem;
+  padding: 2.5rem 0 calc(2rem + env(safe-area-inset-bottom));
 
   &__inner {
     display: grid;
@@ -25,9 +25,13 @@
     }
 
     img {
-      height: 72px;
+      height: 56px;
       width: auto;
-      max-width: 280px;
+      max-width: min(280px, 80vw);
+
+      @media (min-width: 480px) {
+        height: 72px;
+      }
       object-fit: contain;
 
       @media (min-width: 700px) {

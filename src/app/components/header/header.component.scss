@@ -4,50 +4,53 @@
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1.25rem 0;
-  transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  padding: 0.75rem 0;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 
   &--solid {
     background: rgba(0, 0, 0, 0.92);
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-    padding: 0.75rem 0;
-
-    .header__brand img {
-      height: 64px;
-
-      @media (min-width: 900px) {
-        height: 80px;
-      }
-    }
   }
 
   &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 0.75rem;
   }
 
   &__brand {
-    flex-shrink: 0;
+    flex-shrink: 1;
+    min-width: 0;
     line-height: 0;
 
     img {
-      height: 72px;
+      height: 44px;
       width: auto;
-      max-width: min(320px, 55vw);
+      max-width: min(200px, 42vw);
       display: block;
       object-fit: contain;
 
+      @media (min-width: 480px) {
+        height: 56px;
+        max-width: 240px;
+      }
+
       @media (min-width: 900px) {
-        height: 96px;
-        max-width: 380px;
+        height: 72px;
+        max-width: 320px;
       }
     }
   }
 
-  &__nav {
+  &--solid .header__brand img {
+    @media (min-width: 900px) {
+      height: 64px;
+    }
+  }
+
+  &__nav--desktop {
     display: none;
     gap: 0.25rem;
 
@@ -74,8 +77,146 @@
     }
   }
 
-  &__cta {
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  &__cta--desktop {
+    display: none;
     font-size: 0.8rem;
-    padding: 0.55rem 1.1rem;
+    padding: 0.55rem 1.15rem;
+
+    @media (min-width: 900px) {
+      display: inline-flex;
+    }
+
+    .instagram-icon {
+      width: 1.25em;
+      height: 1.25em;
+    }
+  }
+
+  &__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transform: skewX(-6deg);
+
+    @media (min-width: 900px) {
+      display: none;
+    }
+  }
+
+  &__menu-icon {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--color-text);
+    position: relative;
+    transition: background 0.2s;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: var(--color-text);
+      transition: transform 0.2s, top 0.2s;
+    }
+
+    &::before {
+      top: -6px;
+    }
+
+    &::after {
+      top: 6px;
+    }
+
+    &--open {
+      background: transparent;
+
+      &::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 98;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: rgba(0, 0, 0, 0.65);
+    cursor: pointer;
+  }
+
+  &__mobile-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(100%, 320px);
+    z-index: 99;
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-border);
+    padding: 5.5rem 1.5rem 2rem;
+    overflow-y: auto;
+    animation: slideIn 0.25s ease;
+  }
+
+  &__mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 1rem 0;
+      cursor: pointer;
+    }
+  }
+
+  &__mobile-cta {
+    width: 100%;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
