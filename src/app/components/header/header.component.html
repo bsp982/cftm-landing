@@ -1,0 +1,21 @@
+<header class="header" [class.header--solid]="scrolled()">
+  <div class="header__inner container">
+    <a class="header__brand" href="#" (click)="scrollTo('hero'); $event.preventDefault()">
+      <img src="assets/logo-cftm.png" alt="CFTM - Circuito Futevôlei Triângulo Mineiro" width="320" height="96" />
+    </a>
+    <nav class="header__nav" aria-label="Principal">
+      <button type="button" (click)="scrollTo('sobre')">O Circuito</button>
+      <button type="button" (click)="scrollTo('investidores')">Patrocínio</button>
+      <button type="button" (click)="scrollTo('ranking')">Ranking</button>
+      <button type="button" (click)="scrollTo('edicoes')">Edições</button>
+    </nav>
+    <a
+      class="header__cta btn btn--accent"
+      href="https://www.instagram.com/cftm.oficial/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Instagram
+    </a>
+  </div>
+</header>

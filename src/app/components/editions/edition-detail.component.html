@@ -1,0 +1,52 @@
+<div class="edition-detail">
+  <button type="button" class="edition-detail__back" (click)="back.emit()">← Voltar às temporadas</button>
+
+  <header class="edition-detail__header">
+    <span class="edition-detail__year">{{ season().year }}</span>
+    <div>
+      <h3 class="edition-detail__title">{{ season().title }}</h3>
+      <p class="edition-detail__subtitle">{{ season().subtitle }}</p>
+      @if (season().status === 'em-andamento') {
+        <span class="edition-detail__badge">Em andamento</span>
+      }
+    </div>
+  </header>
+
+  <section class="edition-detail__block">
+    <h4 class="edition-detail__block-title">Etapas do circuito</h4>
+    <ol class="edition-detail__stages">
+      @for (stage of season().stages; track stage.number) {
+        <li class="edition-detail__stage">
+          <span class="edition-detail__stage-num">{{ stage.number }}</span>
+          <div>
+            <strong>{{ stage.title }}</strong>
+            <span class="edition-detail__stage-dates">{{ stage.dates }}</span>
+            <span class="edition-detail__stage-venue">{{ stage.venue }}</span>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="edition-detail__block">
+    <h4 class="edition-detail__block-title">Ranking final por categoria</h4>
+    <p class="edition-detail__hint">Classificação consolidada ao fim da temporada.</p>
+    <app-season-ranking [rankingGroups]="season().finalRankings" />
+  </section>
+
+  <section class="edition-detail__block">
+    <h4 class="edition-detail__block-title">Patrocinadores {{ season().year }}</h4>
+    <div class="edition-detail__sponsors">
+      @for (group of season().sponsors; track group.tier) {
+        <div class="edition-detail__sponsor-card">
+          <h5>{{ group.tier }}</h5>
+          <ul>
+            @for (name of group.names; track name) {
+              <li>{{ name }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </section>
+</div>

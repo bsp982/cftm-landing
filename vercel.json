@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/cftm-landing/browser",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

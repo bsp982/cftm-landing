@@ -1,0 +1,174 @@
+.edition-detail {
+  &__back {
+    background: none;
+    border: none;
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0;
+    margin-bottom: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__year {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  &__title {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  &__badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #000;
+    background: var(--color-accent);
+    padding: 0.35rem 0.75rem;
+    transform: skewX(-6deg);
+  }
+
+  &__block {
+    margin-bottom: 3rem;
+  }
+
+  &__block-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-style: italic;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem;
+  }
+
+  &__hint {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: -0.5rem 0 1.25rem;
+    line-height: 1.5;
+
+    code {
+      font-size: 0.8em;
+      color: var(--color-accent);
+    }
+  }
+
+  &__stages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+
+    @media (min-width: 700px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__stage {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+
+    strong {
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  &__stage-num {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--color-accent);
+    min-width: 2rem;
+  }
+
+  &__stage-dates,
+  &__stage-venue {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  &__stage-venue {
+    color: var(--color-text);
+    margin-top: 0.15rem;
+  }
+
+  &__sponsors {
+    display: grid;
+    gap: 1rem;
+
+    @media (min-width: 700px) {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  &__sponsor-card {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    padding: 1.25rem;
+
+    h5 {
+      margin: 0 0 0.75rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+        padding: 0.3rem 0;
+        border-bottom: 1px solid var(--color-border);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

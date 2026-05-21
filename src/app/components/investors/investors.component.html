@@ -1,0 +1,34 @@
+<section id="investidores" class="investors section section--dark">
+  <div class="container">
+    <div class="investors__header">
+      <span class="section-label">Para marcas e investidores</span>
+      <h2 class="section-title">O tamanho do evento que você patrocina</h2>
+      <p class="investors__intro">
+        O CFTM entrega visibilidade em arena, digital e comunidade esportiva. Conheça os números e o alcance do
+        circuito — depois fale com a organização pelo WhatsApp.
+      </p>
+    </div>
+
+    <div class="investors__highlights">
+      @for (item of highlights; track item.title) {
+        <article class="investors__card">
+          <div class="investors__icon" [attr.data-icon]="item.icon" aria-hidden="true"></div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </article>
+      }
+    </div>
+
+    <div class="investors__cta">
+      <p>Quer colocar sua marca no circuito?</p>
+      <a
+        class="btn btn--accent"
+        [href]="site.whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Falar com a organização — {{ site.whatsappDisplay }}
+      </a>
+    </div>
+  </div>
+</section>

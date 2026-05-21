@@ -1,0 +1,119 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8.5rem 0 5rem;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.85) 100%),
+      url('https://images.unsplash.com/photo-1593341646782-e0b495cff62d?w=1920&q=80') center / cover no-repeat;
+    filter: grayscale(100%) contrast(1.1);
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(200, 255, 0, 0.08), transparent 60%);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+
+  &__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__title-main {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 12vw, 6.5rem);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  &__title-sub {
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  &__tagline {
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 32rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  &__stats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 28rem;
+
+    li {
+      border-left: 3px solid var(--color-accent);
+      padding-left: 1rem;
+    }
+
+    strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    span {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  &__slant {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: var(--color-bg);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+}

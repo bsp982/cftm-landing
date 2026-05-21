@@ -1,0 +1,78 @@
+<section id="ranking" class="ranking section">
+  <div class="container">
+    <div class="ranking__header">
+      <span class="section-label">Para atletas</span>
+      <h2 class="section-title">Ranking em tempo real</h2>
+      <p class="ranking__note">
+        Classificação individual por pontos na temporada, separada por modalidade masculina e feminina. Os
+        dados abaixo são estáticos para demonstração — na integração futura, a lista será atualizada após cada
+        etapa.
+      </p>
+    </div>
+
+    <div class="ranking__gender-tabs" role="tablist" aria-label="Modalidade">
+      @for (group of rankingGroups; track group.gender) {
+        <button
+          type="button"
+          role="tab"
+          [attr.aria-selected]="activeGender() === group.gender"
+          class="ranking__gender-tab"
+          [class.ranking__gender-tab--active]="activeGender() === group.gender"
+          (click)="selectGender(group.gender)"
+        >
+          {{ group.genderLabel }}
+        </button>
+      }
+    </div>
+
+    <div class="ranking__tabs" role="tablist" aria-label="Categorias do ranking">
+      @for (cat of categories(); track cat.id) {
+        <button
+          type="button"
+          role="tab"
+          [attr.aria-selected]="activeCategory() === cat.id"
+          class="ranking__tab"
+          [class.ranking__tab--active]="activeCategory() === cat.id"
+          (click)="selectCategory(cat.id)"
+        >
+          {{ cat.label }}
+        </button>
+      }
+    </div>
+
+    @if (activeRanking(); as ranking) {
+      <div class="ranking__meta">
+        <span>{{ activeGroup().genderLabel }} · Temporada {{ ranking.season }}</span>
+        <span class="ranking__live">
+          <span class="ranking__pulse" aria-hidden="true"></span>
+          Atualizado em {{ ranking.lastUpdated }}
+        </span>
+      </div>
+
+      <div class="ranking__table-wrap">
+        <table class="ranking__table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Atleta</th>
+              <th scope="col">Cidade</th>
+              <th scope="col">Pontos</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of ranking.standings; track row.name) {
+              <tr [class.ranking__row--top]="row.position <= 3">
+                <td>
+                  <span class="ranking__pos">{{ row.position }}</span>
+                </td>
+                <td><strong>{{ row.name }}</strong></td>
+                <td>{{ row.city }}</td>
+                <td class="ranking__pts">{{ row.points }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</section>

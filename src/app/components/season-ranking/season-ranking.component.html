@@ -1,0 +1,56 @@
+<div class="season-ranking">
+  <div class="season-ranking__gender-tabs" role="tablist" aria-label="Modalidade">
+    @for (group of rankingGroups(); track group.gender) {
+      <button
+        type="button"
+        role="tab"
+        [attr.aria-selected]="activeGender() === group.gender"
+        class="season-ranking__gender-tab"
+        [class.season-ranking__gender-tab--active]="activeGender() === group.gender"
+        (click)="selectGender(group.gender)"
+      >
+        {{ group.genderLabel }}
+      </button>
+    }
+  </div>
+
+  <div class="season-ranking__tabs" role="tablist" aria-label="Categorias">
+    @for (cat of categories(); track cat.id) {
+      <button
+        type="button"
+        role="tab"
+        class="season-ranking__tab"
+        [class.season-ranking__tab--active]="activeCategory() === cat.id"
+        (click)="selectCategory(cat.id)"
+      >
+        {{ cat.label }}
+      </button>
+    }
+  </div>
+
+  @if (activeRanking(); as ranking) {
+    <p class="season-ranking__meta">{{ activeGroup().genderLabel }} · {{ ranking.label }}</p>
+    <div class="season-ranking__table-wrap">
+      <table class="season-ranking__table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Atleta</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Pontos</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of ranking.standings; track row.name) {
+            <tr [class.season-ranking__row--top]="row.position <= 3">
+              <td><span class="season-ranking__pos">{{ row.position }}</span></td>
+              <td><strong>{{ row.name }}</strong></td>
+              <td>{{ row.city }}</td>
+              <td class="season-ranking__pts">{{ row.points }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

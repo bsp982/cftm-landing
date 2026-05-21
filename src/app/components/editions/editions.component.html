@@ -1,0 +1,27 @@
+<section id="edicoes" class="editions section section--dark">
+  <div class="container">
+    @if (!selectedYear()) {
+      <span class="section-label">Histórico</span>
+      <h2 class="section-title">Edições do circuito</h2>
+      <p class="editions__intro">Selecione o ano para ver etapas, ranking final e patrocinadores da temporada.</p>
+      <ol class="editions__timeline">
+        @for (season of seasons; track season.year) {
+          <li>
+            <button type="button" class="editions__item" (click)="openSeason(season.year)">
+              <span class="editions__year">{{ season.year }}</span>
+              <div class="editions__item-body">
+                <h3>{{ season.title }}</h3>
+                <p>{{ season.subtitle }}</p>
+                <span class="editions__cta">Ver detalhes →</span>
+              </div>
+            </button>
+          </li>
+        }
+      </ol>
+    } @else {
+      @if (selectedSeason(); as season) {
+        <app-edition-detail [season]="season" (back)="closeSeason()" />
+      }
+    }
+  </div>
+</section>
