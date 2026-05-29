@@ -1,5 +1,5 @@
 import { Component, computed, input, signal } from '@angular/core';
-import { RankingCategory, RankingGender, RankingGroup } from '../../models/ranking.model';
+import { RankingGender, RankingGroup } from '../../models/ranking.model';
 
 @Component({
   selector: 'app-season-ranking',
@@ -11,7 +11,7 @@ export class SeasonRankingComponent {
   readonly rankingGroups = input.required<RankingGroup[]>();
 
   readonly activeGender = signal<RankingGender>('masculino');
-  readonly activeCategory = signal<RankingCategory>('m-principiante');
+  readonly activeCategory = signal<string>('m-principiante');
 
   readonly activeGroup = computed(() => {
     const groups = this.rankingGroups();
@@ -33,7 +33,7 @@ export class SeasonRankingComponent {
     }
   }
 
-  selectCategory(id: RankingCategory): void {
+  selectCategory(id: string): void {
     this.activeCategory.set(id);
   }
 }

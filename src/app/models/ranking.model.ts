@@ -1,4 +1,4 @@
-export type RankingGender = 'masculino' | 'feminino';
+export type RankingGender = 'masculino' | 'feminino' | 'misto';
 
 export type RankingCategory =
   | 'm-principiante'
@@ -14,12 +14,12 @@ export type RankingCategory =
 export interface AthleteRanking {
   position: number;
   name: string;
-  city: string;
+  city?: string;
   points: number;
 }
 
 export interface CategoryRanking {
-  id: RankingCategory;
+  id: string;
   label: string;
   season: string;
   lastUpdated: string;
