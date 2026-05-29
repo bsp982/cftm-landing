@@ -12,9 +12,10 @@
     @if (loading()) {
       <p class="ranking__status" role="status">Carregando ranking…</p>
     } @else if (loadError()) {
-      <p class="ranking__status ranking__status--error" role="alert">
-        Não foi possível carregar o ranking no momento. Tente novamente mais tarde.
-      </p>
+      <div class="ranking__status ranking__status--error" role="alert">
+        <p>Não foi possível carregar o ranking no momento. Tente novamente.</p>
+        <button type="button" class="ranking__retry" (click)="retryLoad()">Tentar novamente</button>
+      </div>
     } @else if (rankingGroups().length) {
       <div class="ranking__gender-tabs" role="tablist" aria-label="Modalidade">
         @for (group of rankingGroups(); track group.gender) {

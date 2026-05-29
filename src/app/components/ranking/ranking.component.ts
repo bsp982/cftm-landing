@@ -75,4 +75,10 @@ export class RankingComponent implements OnInit {
   selectCategory(id: string): void {
     this.activeCategory.set(id);
   }
+
+  retryLoad(): void {
+    this.loading.set(true);
+    this.loadError.set(false);
+    this.rankingService.reloadRanking();
+  }
 }

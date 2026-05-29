@@ -18,6 +18,31 @@
 
     &--error {
       color: var(--color-accent, #e85d4c);
+
+      p {
+        margin: 0 0 1rem;
+      }
+    }
+  }
+
+  &__retry {
+    background: transparent;
+    border: 2px solid var(--color-accent, #e85d4c);
+    color: var(--color-accent, #e85d4c);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.06em;
+    padding: 0.55rem 1.25rem;
+    text-transform: uppercase;
+    transform: skewX(-6deg);
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: var(--color-accent, #e85d4c);
+      color: var(--color-bg, #000);
     }
   }
 
