@@ -8,6 +8,9 @@
       <a [href]="site.instagram" target="_blank" rel="noopener noreferrer">Instagram {{ site.instagramHandle }}</a>
       <a href="mailto:{{ site.contactEmail }}">{{ site.contactEmail }}</a>
     </div>
-    <p class="footer__copy">© {{ year }} CFTM. Todos os direitos reservados.</p>
+    <p class="footer__copy">
+      © {{ year }} CFTM. Todos os direitos reservados.
+      <span class="footer__version">Versão {{ appVersion }}</span>
+    </p>
   </div>
 </footer>

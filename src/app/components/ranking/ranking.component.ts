@@ -1,4 +1,5 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RankingGender, RankingGroup } from '../../models/ranking.model';
 import { RankingService } from '../../services/ranking.service';
 
@@ -10,6 +11,7 @@ import { RankingService } from '../../services/ranking.service';
 })
 export class RankingComponent implements OnInit {
   private readonly rankingService = inject(RankingService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly rankingGroups = signal<RankingGroup[]>([]);
   readonly loading = signal(true);
@@ -17,6 +19,8 @@ export class RankingComponent implements OnInit {
 
   readonly activeGender = signal<RankingGender>('masculino');
   readonly activeCategory = signal<string>('');
+
+  private tabsInitialized = false;
 
   readonly activeGroup = computed(() => {
     const groups = this.rankingGroups();
@@ -36,22 +40,28 @@ export class RankingComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    this.rankingService.loadRankingGroups().subscribe({
-      next: (groups) => {
-        this.rankingGroups.set(groups);
-        this.loading.set(false);
-        this.loadError.set(false);
-        const firstGroup = groups[0];
-        if (firstGroup) {
-          this.activeGender.set(firstGroup.gender);
-          this.activeCategory.set(firstGroup.categories[0]?.id ?? '');
-        }
-      },
-      error: () => {
-        this.loading.set(false);
-        this.loadError.set(true);
-      },
-    });
+    this.rankingService
+      .watchRankingGroups()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (groups) => {
+          this.rankingGroups.set(groups);
+          this.loading.set(false);
+          this.loadError.set(false);
+          if (!this.tabsInitialized && groups.length > 0) {
+            this.tabsInitialized = true;
+            const firstGroup = groups[0];
+            this.activeGender.set(firstGroup.gender);
+            this.activeCategory.set(firstGroup.categories[0]?.id ?? '');
+          }
+        },
+        error: () => {
+          this.loading.set(false);
+          if (this.rankingGroups().length === 0) {
+            this.loadError.set(true);
+          }
+        },
+      });
   }
 
   selectGender(gender: RankingGender): void {
